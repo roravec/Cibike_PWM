@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c config.c PCA9685.c i2c.c hwinterface.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c config.c PCA9685.c i2c.c hwinterface.c timer.c peripherals.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/PCA9685.o ${OBJECTDIR}/i2c.o ${OBJECTDIR}/hwinterface.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/config.o.d ${OBJECTDIR}/PCA9685.o.d ${OBJECTDIR}/i2c.o.d ${OBJECTDIR}/hwinterface.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/PCA9685.o ${OBJECTDIR}/i2c.o ${OBJECTDIR}/hwinterface.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/peripherals.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/config.o.d ${OBJECTDIR}/PCA9685.o.d ${OBJECTDIR}/i2c.o.d ${OBJECTDIR}/hwinterface.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/peripherals.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/PCA9685.o ${OBJECTDIR}/i2c.o ${OBJECTDIR}/hwinterface.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/config.o ${OBJECTDIR}/PCA9685.o ${OBJECTDIR}/i2c.o ${OBJECTDIR}/hwinterface.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/peripherals.o
 
 # Source Files
-SOURCEFILES=main.c config.c PCA9685.c i2c.c hwinterface.c
+SOURCEFILES=main.c config.c PCA9685.c i2c.c hwinterface.c timer.c peripherals.c
 
 
 
@@ -107,66 +107,90 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/abd6c906c72d5ca38ebe30e57674c888940bf506 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
+${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/dbf3e6a6331c5ee7472319ba868bf82345fbd449 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.o.d 
 	@${RM} ${OBJECTDIR}/main.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG   -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/main.o.d" -o ${OBJECTDIR}/main.o main.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/config.o: config.c  .generated_files/flags/default/d6a04b0ada58d02dc218989a63eee8bb2118646c .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
+${OBJECTDIR}/config.o: config.c  .generated_files/flags/default/821db152fe21e198dd52b1fb47db55a88e9919ce .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/config.o.d 
 	@${RM} ${OBJECTDIR}/config.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG   -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/config.o.d" -o ${OBJECTDIR}/config.o config.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/PCA9685.o: PCA9685.c  .generated_files/flags/default/150effe256dc95b3f64f6d361b0fbdc81b136eb4 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
+${OBJECTDIR}/PCA9685.o: PCA9685.c  .generated_files/flags/default/2739ec4ca99a9d141fb0e04119212f5c2041456d .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/PCA9685.o.d 
 	@${RM} ${OBJECTDIR}/PCA9685.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG   -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/PCA9685.o.d" -o ${OBJECTDIR}/PCA9685.o PCA9685.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/i2c.o: i2c.c  .generated_files/flags/default/38fd7d62d4863b58487d752aee1ba1715e3a445d .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
+${OBJECTDIR}/i2c.o: i2c.c  .generated_files/flags/default/1199a8324ac33537dd7b841f47d2fe700df64190 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/i2c.o.d 
 	@${RM} ${OBJECTDIR}/i2c.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG   -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/i2c.o.d" -o ${OBJECTDIR}/i2c.o i2c.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/hwinterface.o: hwinterface.c  .generated_files/flags/default/6d263c71a0b5ef173a26ceb17dc014753219e92c .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
+${OBJECTDIR}/hwinterface.o: hwinterface.c  .generated_files/flags/default/4d15e89bd1ffcb1419b39a4de26f7fa429a6eb8f .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/hwinterface.o.d 
 	@${RM} ${OBJECTDIR}/hwinterface.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG   -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/hwinterface.o.d" -o ${OBJECTDIR}/hwinterface.o hwinterface.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
+${OBJECTDIR}/timer.o: timer.c  .generated_files/flags/default/6edbb2623ecdbb87099a50e1a941049c331fa002 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/timer.o.d 
+	@${RM} ${OBJECTDIR}/timer.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG   -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/timer.o.d" -o ${OBJECTDIR}/timer.o timer.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/peripherals.o: peripherals.c  .generated_files/flags/default/8c8c43b1222f4bf5350b868e181b2eb3d0a92c10 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/peripherals.o.d 
+	@${RM} ${OBJECTDIR}/peripherals.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG   -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/peripherals.o.d" -o ${OBJECTDIR}/peripherals.o peripherals.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
 else
-${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/ff84adea154d6e550f396465d7625602bed0a373 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
+${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/97535021d25dc0a690dd0631413b0745d90864b0 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.o.d 
 	@${RM} ${OBJECTDIR}/main.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/main.o.d" -o ${OBJECTDIR}/main.o main.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/config.o: config.c  .generated_files/flags/default/24829d3397dc6e333245d24a17cbe7d42dae64c5 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
+${OBJECTDIR}/config.o: config.c  .generated_files/flags/default/afc734bf9915f95e5d78eeab8e8afdedceb2d012 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/config.o.d 
 	@${RM} ${OBJECTDIR}/config.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/config.o.d" -o ${OBJECTDIR}/config.o config.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/PCA9685.o: PCA9685.c  .generated_files/flags/default/15bcba00924def0a7adb4f6c77a60dc411c8225d .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
+${OBJECTDIR}/PCA9685.o: PCA9685.c  .generated_files/flags/default/a798ef60091555c5b96fd0ae621e8dc6898f96e9 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/PCA9685.o.d 
 	@${RM} ${OBJECTDIR}/PCA9685.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/PCA9685.o.d" -o ${OBJECTDIR}/PCA9685.o PCA9685.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/i2c.o: i2c.c  .generated_files/flags/default/3a5c9b82d03bf7abb839913ce78a3fa2a015cdf5 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
+${OBJECTDIR}/i2c.o: i2c.c  .generated_files/flags/default/17c85832f1d759c982d6d3eaf0679870336adc12 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/i2c.o.d 
 	@${RM} ${OBJECTDIR}/i2c.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/i2c.o.d" -o ${OBJECTDIR}/i2c.o i2c.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/hwinterface.o: hwinterface.c  .generated_files/flags/default/e726e76a3f0e164dfc0f6d6ad3e3a7a5e67417d6 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
+${OBJECTDIR}/hwinterface.o: hwinterface.c  .generated_files/flags/default/a825e30e1c6c57b960f9dbbaa2751cff2519e25e .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/hwinterface.o.d 
 	@${RM} ${OBJECTDIR}/hwinterface.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/hwinterface.o.d" -o ${OBJECTDIR}/hwinterface.o hwinterface.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/timer.o: timer.c  .generated_files/flags/default/22d78eec56642fb31097e089b053a681688f8fd5 .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/timer.o.d 
+	@${RM} ${OBJECTDIR}/timer.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/timer.o.d" -o ${OBJECTDIR}/timer.o timer.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/peripherals.o: peripherals.c  .generated_files/flags/default/fdb479401eaf2864ac49e7b2825df1f267779d7b .generated_files/flags/default/5a72ac1cc227a866bb30217c0e6ea1920c4e18c3
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/peripherals.o.d 
+	@${RM} ${OBJECTDIR}/peripherals.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/peripherals.o.d" -o ${OBJECTDIR}/peripherals.o peripherals.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 endif
 

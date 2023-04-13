@@ -10,6 +10,7 @@
 #define _CONFIG_H
 
 #include <xc.h>
+#include "hwinterface.h"
 
 //#define FCY         30000000UL
 //#define PCLK        15000000UL
@@ -23,12 +24,13 @@
 #define SYS_FREQ    PCLK
 
 /* Function prototypes */
+void Init_Config(void);
 void Delay_us(uint32_t us);
 void Delay_ms(uint32_t ms);
 void Delay(uint32_t del);
 void InitOscillator(void);
 void InitInterrupts(void);
-void InitGPIOs();
+void InitGPIOs(void);
 /***********************/
 
 #endif /* _CONFIG_H */

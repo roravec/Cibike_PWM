@@ -7,6 +7,14 @@
  */ 
 #include "config.h"
 
+void Init_Config(void)
+{
+    InitOscillator();
+    InitInterrupts();
+    HW_Init();
+    
+}
+
 uint32_t __coretimer = 0; // used to calculate core ticks
 void Delay_us(uint32_t us)
 {

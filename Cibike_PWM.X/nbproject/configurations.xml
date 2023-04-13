@@ -8,6 +8,8 @@
       <itemPath>PCA9685.h</itemPath>
       <itemPath>i2c.h</itemPath>
       <itemPath>hwinterface.h</itemPath>
+      <itemPath>timer.h</itemPath>
+      <itemPath>peripherals.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -21,6 +23,8 @@
       <itemPath>PCA9685.c</itemPath>
       <itemPath>i2c.c</itemPath>
       <itemPath>hwinterface.c</itemPath>
+      <itemPath>timer.c</itemPath>
+      <itemPath>peripherals.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

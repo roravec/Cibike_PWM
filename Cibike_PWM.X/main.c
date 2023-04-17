@@ -19,7 +19,7 @@
 #pragma config FPLLODIV = DIV_2         // System PLL Output Clock Divider (PLL Divide by 2)
 
 // DEVCFG1
-#pragma config FNOSC = FRCDIV           // Oscillator Selection Bits (Fast RC Osc w/Div-by-N (FRCDIV))
+#pragma config FNOSC = FRCPLL           // Oscillator Selection Bits (Fast RC Osc w/Div-by-N (FRCDIV))
 #pragma config FSOSCEN = OFF            // Secondary Oscillator Enable (Disabled)
 #pragma config IESO = ON                // Internal/External Switch Over (Enabled)
 #pragma config POSCMOD = OFF            // Primary Oscillator Configuration (Primary osc disabled)
@@ -33,7 +33,7 @@
 
 // DEVCFG0
 #pragma config JTAGEN = ON              // JTAG Enable (JTAG Port Enabled)
-#pragma config ICESEL = ICS_PGx1        // ICE/ICD Comm Channel Select (Communicate on PGEC1/PGED1)
+#pragma config ICESEL = ICS_PGx3        // ICE/ICD Comm Channel Select (Communicate on PGEC1/PGED1)
 #pragma config PWP = OFF                // Program Flash Write Protect (Disable)
 #pragma config BWP = OFF                // Boot Flash Write Protect bit (Protection Disabled)
 #pragma config CP = OFF                 // Code Protect (Protection Disabled)
@@ -42,12 +42,15 @@
 // Use project enums instead of #define for ON and OFF.
 
 #include <xc.h>
+#include "manager.h"
 
 #include "config.h"
 
 void setup(void)
 {
     Init_Config();
+    I2C_Init(PCLK,I2C_SPEED);
+    Manager_Init();
 }
 
 void main(void) 
@@ -55,7 +58,7 @@ void main(void)
     setup();
     while (1)
     {
-        
+        Manager_Loop();
     }
     return;
 }

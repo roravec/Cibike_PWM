@@ -10,6 +10,11 @@
       <itemPath>hwinterface.h</itemPath>
       <itemPath>timer.h</itemPath>
       <itemPath>peripherals.h</itemPath>
+      <itemPath>i2c_display.h</itemPath>
+      <itemPath>I2C_Common.h</itemPath>
+      <itemPath>ui.h</itemPath>
+      <itemPath>M24256E.h</itemPath>
+      <itemPath>manager.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -25,6 +30,10 @@
       <itemPath>hwinterface.c</itemPath>
       <itemPath>timer.c</itemPath>
       <itemPath>peripherals.c</itemPath>
+      <itemPath>i2c_display.c</itemPath>
+      <itemPath>ui.c</itemPath>
+      <itemPath>M24256E.c</itemPath>
+      <itemPath>manager.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -42,7 +51,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>pk4hybrid</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>4.00</languageToolchainVersion>
+        <languageToolchainVersion>4.10</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>

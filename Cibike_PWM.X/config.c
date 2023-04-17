@@ -12,7 +12,6 @@ void Init_Config(void)
     InitOscillator();
     InitInterrupts();
     HW_Init();
-    
 }
 
 uint32_t __coretimer = 0; // used to calculate core ticks
@@ -57,6 +56,7 @@ void InitOscillator(void)
 
 void InitInterrupts(void)
 {
+    INTCONbits.MVEC = 1;
     asm volatile("ei");
     __builtin_enable_interrupts();
 }

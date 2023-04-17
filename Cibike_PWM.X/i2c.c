@@ -5,7 +5,6 @@
  * 
  * Description: PIC32 I2C communication library
  */ 
-#include <xc.h>
 #include "i2c.h"
 
 // I2C_init() initialises I2C1 at at frequency of [frequency]Hz  

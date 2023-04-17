@@ -9,6 +9,8 @@
 #ifndef _I2C_H    /* Guard against multiple inclusion */
 #define _I2C_H
 
+#include <xc.h>
+
 void I2C_Init(uint32_t sys_frequency, uint32_t frequency);
 void I2C_WaitForIdle(void);
 void I2C_Start(uint8_t addr);

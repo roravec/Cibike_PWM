@@ -29,10 +29,10 @@ void LCD_Init()
   
 //    for (uint8_t i=0; i<255 ;i++)
 //        LCD_Write_Char(0x55);
-    /*LCD_Set_Cursor(1, 1);
-    LCD_Write_String("  Welcome To ");
-    LCD_Set_Cursor(2, 1);  
-    LCD_Write_String("  MicroDigiSoft ");*/
+//    LCD_Set_Cursor(1, 1);
+//    LCD_Write_String("  Welcome To ");
+//    LCD_Set_Cursor(2, 1);  
+//    LCD_Write_String("  MicroDigiSoft ");
 }
 
 void LCD_IO_Expander_Write(uint8_t Data) 

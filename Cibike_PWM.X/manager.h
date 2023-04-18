@@ -8,6 +8,7 @@
 #ifndef MANAGER_H
 #define	MANAGER_H
 
+#include "config.h"
 #include "ui.h"
 #include "M24256E.h"
 #include "PCA9685.h"

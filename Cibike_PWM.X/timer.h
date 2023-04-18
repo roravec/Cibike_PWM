@@ -11,7 +11,9 @@
 #include <xc.h>
 #include <sys/attribs.h>
 #include <stdbool.h>
+#include "config.h"
 
+#define TIMER_PRESCALE      256
 #define TIMERS_COUNT        10
 
 #ifdef	__cplusplus
@@ -20,17 +22,17 @@ extern "C" {
     
     typedef struct
     {
-        uint16_t    startTime;
+        uint32_t    startTime;
         uint32_t    overflow0;
-        uint8_t     overflowsRequired;
-        uint16_t    duration;
-        uint16_t    endTime;
+        uint16_t    overflowsRequired;
+        uint32_t    duration;
+        uint32_t    endTime;
     } Timer;
     
     typedef enum { TIMER_UNKNOWN, TIMER_RUNNING, TIMER_EXPIRED } TimerStatus;
 
 void Timer_Init(void);
-Timer * Timer_Set(Timer *  timer, uint16_t time);
+Timer * Timer_Set(Timer *  timer, uint32_t time);
 TimerStatus Timer_GetStatus(Timer *  timer);
 
 #ifdef	__cplusplus

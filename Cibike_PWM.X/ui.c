@@ -6,6 +6,8 @@ void UI_Init(void)
 {
     LCD_Init();
     UI_Clear();
+    LCD_Write_String("TEST");
+    LCD_NoBacklight();
 }
 
 void UI_Clear()

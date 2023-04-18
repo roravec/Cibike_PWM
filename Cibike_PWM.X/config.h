@@ -14,8 +14,10 @@
 
 //#define FCY         30000000UL
 //#define PCLK        15000000UL
+//#define FCY         48000000UL // CPU frequency
+//#define PCLK        48000000UL // peripheral frequency
 #define FCY         48000000UL // CPU frequency
-#define PCLK        48000000UL // peripheral frequency
+#define PCLK        24000000UL // peripheral frequency
 #define I2C_SPEED   100000      
 #define _DI()		__builtin_disable_interrupts()
 #define _EI()		__builtin_enable_interrupts()

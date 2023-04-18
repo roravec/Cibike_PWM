@@ -20,6 +20,7 @@ void I2C_Init(uint32_t sys_frequency, uint32_t frequency)
 
     BRG = (1 / (2 * frequency)) - 0.000000104;
     BRG *= (sys_frequency / 2) - 2;    
+    //BRG = 0x00F6;
 
     I2C1BRG = (uint32_t)BRG;     // Set baud rate
 //    I2C2BRG = 0x95;     // Set baud rate

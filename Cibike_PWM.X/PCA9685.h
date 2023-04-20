@@ -11,8 +11,11 @@
 #include <xc.h>
 #include <stdbool.h>
 #include "i2c.h"
+#include "config.h"
 
 /* Registers *****************************/
+//#define PCA9685_ADDRESS_W           0xE0
+//#define PCA9685_ADDRESS_R           0xE1
 #define PCA9685_ADDRESS_W           0x80
 #define PCA9685_ADDRESS_R           0x81
 
@@ -119,6 +122,9 @@
 #define PCA9685_PRESCALE_MAX        0xFF
 #define PCA9685_DEFAULT_PRESCALE    30
 #define PCA9685_DEFAULT_DUTY        0
+#define PCA9685_MAX_FREQ            1500
+#define PCA9685_MIN_FREQ            25
+
 
 #define PCA9685_CHANNEL_OFF_OFFSET  2
 
@@ -152,8 +158,10 @@ extern "C" {
     void PCA9685_SendCommand(uint8_t registerAddress, uint8_t value);
     void PCA9685_SetChannel(PCA9685_Channel channel, uint16_t valueON, uint16_t valueOFF);
     void PCA9685_SetPreScale(uint8_t prescale);
+    void PCA9685_SetFreq(uint16_t freq);
     void PCA9685_SetChannelDuty(PCA9685_Channel channel, uint8_t duty);
     void PCA9685_SetAllChannels(uint16_t valueON, uint16_t valueOFF);
+    PCA9685_Channel PCA9685_GetChannelByNum(uint8_t chnum);
 
 #ifdef	__cplusplus
 }

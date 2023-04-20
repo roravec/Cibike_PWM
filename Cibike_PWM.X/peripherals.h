@@ -8,8 +8,12 @@
 #ifndef PERIPHERALS_H
 #define	PERIPHERALS_H
 
-#define ROTARY_DIR_CINFIRMATIONS_NEEDED     3
+#include <sys/attribs.h>
 
+#define ROTARY_DIR_CINFIRMATIONS_NEEDED     1
+#define ROTARY_CHANNELS                     16
+
+#include "config.h"
 #include "hwinterface.h"
 #include <stdbool.h>
 
@@ -28,6 +32,10 @@ extern "C" {
     bool        Peripherals_GetLock(void);
     bool        Peripherals_GetFreqDuty(void);
     void        Peripherals_ToggleTI(uint16_t timerVal);
+    
+    void Per_SetActualChannel(uint8_t channel);
+    uint8_t Per_GetActualChannel(void);
+    uint8_t Per_GetChannelDuty(uint8_t channel);
 
 #ifdef	__cplusplus
 }

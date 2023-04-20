@@ -1,6 +1,8 @@
 build/default/production/peripherals.o: peripherals.c peripherals.h \
- hwinterface.h
+ config.h hwinterface.h
 
 peripherals.h:
+
+config.h:
 
 hwinterface.h:

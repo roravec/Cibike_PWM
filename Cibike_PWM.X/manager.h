@@ -18,9 +18,16 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
+    typedef enum { UNKNOWN_MODE, DUTY_MODE, FREQ_MODE } ManagerMode;
+    
     void Manager_Init(void);
     void Manager_Loop(void);
+    void Manager_DutyMode(void);
+    void Manager_FreqMode(void);
+    void Manager_UpdateDisplay(void);
+    void Manager_ApplyPWMValues(void);
+    uint8_t Manager_GetNiceChNum(uint8_t chNum);
+    void Manager_ApplyStartValues(void);
 
 
 

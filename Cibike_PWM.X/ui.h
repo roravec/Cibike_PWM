@@ -10,6 +10,7 @@
 
 #include "i2c_display.h"
 #include <stdbool.h>
+#include <stdio.h>
 
 #define DISPLAY_LINE_LIMIT  16
 #define DISPLAY_LINES       2
@@ -24,6 +25,9 @@ extern "C" {
     void UI_Init(void);
     void UI_Clear();
     void UI_WriteLine(UI_Line line, uint8_t * str);
+    void UI_PrintStatus(uint8_t activeLine, uint16_t freq, uint8_t channel, uint8_t value);
+    void UI_PrintChannelDuty(uint8_t channel, uint8_t value);
+    void UI_PrintFreq(uint16_t freq);
 
 
 #ifdef	__cplusplus

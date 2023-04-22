@@ -37,10 +37,21 @@ void Delay_ticks(uint32_t del)
 
 void InitOscillator(void)
 {
+    SYSKEY = 0x0; // ensure OSCCON is locked
+    SYSKEY = 0xAA996655; // Write Key1 to SYSKEY
+    SYSKEY = 0x556699AA; // Write Key2 to SYSKEY
+    // OSCCON is now unlocked
+    // make the desired change
     //PLL output divider set to 1
-    OSCCONbits.PLLODIV2 = 0;
-    OSCCONbits.PLLODIV1 = 0;
-    OSCCONbits.PLLODIV0 = 0;
+//    OSCCONbits.PLLODIV2 = 0;
+//    OSCCONbits.PLLODIV1 = 0;
+//    OSCCONbits.PLLODIV0 = 0;
+    
+    RPD1R = 0b1100; // PWM on RPD1R
+    
+    // Relock the SYSKEY
+    SYSKEY = 0x0; // Write any value other than Key1 or Key2
+    // OSCCON is relocked
     
     /* From documentation:
         111 = PLL output divided by 256

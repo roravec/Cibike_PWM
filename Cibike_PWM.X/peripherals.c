@@ -147,7 +147,7 @@ bool        Peripherals_GetReset(void)
 
 bool        Peripherals_GetLock(void)
 {
-    return (bool)HW_RESET_PORT;
+    return (bool)HW_LOCK_PORT;
 }
 
 bool        Peripherals_GetFreqDuty(void)
@@ -155,6 +155,13 @@ bool        Peripherals_GetFreqDuty(void)
     return (bool)HW_FREQ_DUTY_PORT;
 }
 
+Timer tiTimer;
+void        Peripherals_StartTI(uint16_t timerVal)
+{
+    PWM_Init();
+    //Timer_Set(&tiTimer, timerVal);
+    // RPD1
+}
 void        Peripherals_ToggleTI(uint16_t timerVal)
 {
     HW_TI_OUT_LAT = ~HW_TI_OUT_PORT;

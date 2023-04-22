@@ -23,7 +23,7 @@ void UI_WriteLine(UI_Line line, uint8_t * str)
     if (line >= DISPLAY_LINE_LIMIT) return; // out of array range
     LCD_Set_Cursor(line+1, 1);
     bool copyEnable = 1;
-    ClearLine(line);
+    UI_ClearLine(line);
     for (uint8_t i=0; i < DISPLAY_LINE_LIMIT ;i++)
     {
         if (str[i] < 32 || str[i] > 126) copyEnable = 0;
@@ -66,7 +66,7 @@ void UI_PrintFreq(uint16_t freq)
     UI_WriteLine(LINE_2, str);
 }
 
-void ClearLine(uint8_t line)
+void UI_ClearLine(uint8_t line)
 {
     if (line >= DISPLAY_LINES) return;
     for (uint8_t i=0; i<DISPLAY_LINE_LIMIT+2 ;i++)

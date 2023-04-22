@@ -9,6 +9,8 @@
 #define	PERIPHERALS_H
 
 #include <sys/attribs.h>
+#include "timer.h"
+#include "pwm.h"
 
 #define ROTARY_DIR_CINFIRMATIONS_NEEDED     1
 #define ROTARY_CHANNELS                     16
@@ -31,6 +33,7 @@ extern "C" {
     bool        Peripherals_GetReset(void);
     bool        Peripherals_GetLock(void);
     bool        Peripherals_GetFreqDuty(void);
+    void        Peripherals_StartTI(uint16_t timerVal);
     void        Peripherals_ToggleTI(uint16_t timerVal);
     
     void Per_SetActualChannel(uint8_t channel);

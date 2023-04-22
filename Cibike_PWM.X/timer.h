@@ -27,6 +27,7 @@ extern "C" {
         uint16_t    overflowsRequired;
         uint32_t    duration;
         uint32_t    endTime;
+        void        (*CallbackFunc)(void);
     } Timer;
     
     typedef enum { TIMER_UNKNOWN, TIMER_RUNNING, TIMER_EXPIRED } TimerStatus;

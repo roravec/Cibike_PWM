@@ -28,6 +28,7 @@ extern "C" {
     void UI_PrintStatus(uint8_t activeLine, uint16_t freq, uint8_t channel, uint8_t value);
     void UI_PrintChannelDuty(uint8_t channel, uint8_t value);
     void UI_PrintFreq(uint16_t freq);
+    void UI_ClearLine(uint8_t line);
 
 
 #ifdef	__cplusplus

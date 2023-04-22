@@ -4,28 +4,28 @@ static volatile uint32_t overflow0 = 0;
 
 void Timer_Init(void)
 {
-    T2CONbits.ON = 0;
+    T4CONbits.ON = 0;
     asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");
-    TMR2 = 0;
+    TMR4 = 0;
     asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");
     //PR1 = 0xFFFF;
     asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");
-    T2CONbits.TGATE = 0;
+    T4CONbits.TGATE = 0;
     asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");
     //T2CONbits.TSYNC = 0;
     asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");
     //T2CONbits.TSYNC = 0;
     asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");
-    IFS0bits.T2IF = 0; // reset interrupt flag
-    IPC2bits.T2IP = 5; // priority 3
-    IPC2bits.T2IS = 2; // subpriority 1
-    IEC0bits.T2IE = 1; // enable interrupt
+    IFS0bits.T4IF = 0; // reset interrupt flag
+    IPC4bits.T4IP = 5; // priority 3
+    IPC4bits.T4IS = 2; // subpriority 1
+    IEC0bits.T4IE = 1; // enable interrupt
     asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");
-    T2CONbits.TCKPS = 0b111; // 1:1
+    T4CONbits.TCKPS = 0b111; // 1:1
     asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");
-    T2CONbits.T32 = 1; // 32bit
+    T4CONbits.T32 = 1; // 32bit
     asm("nop");asm("nop");asm("nop");asm("nop");asm("nop");
-    T2CONbits.ON = 1;
+    T4CONbits.ON = 1;
 }
 
 Timer * Timer_Set(Timer *  timer, uint32_t time)
@@ -35,8 +35,8 @@ Timer * Timer_Set(Timer *  timer, uint32_t time)
     if (timer == 0) return 0;
     timer->duration = time;
     timer->overflow0 = overflow0;
-    timer->startTime = TMR2;
-    timer->endTime = TMR2 + time;
+    timer->startTime = TMR4;
+    timer->endTime = TMR4 + time;
     if (timer->startTime > timer->endTime) // overflow
         timer->overflowsRequired = 0xFFFFFFFF / time;
     else
@@ -47,9 +47,9 @@ TimerStatus Timer_GetStatus(Timer *  timer)
 {
     if (timer == 0) return TIMER_UNKNOWN;
     if (timer->duration == 0) return TIMER_EXPIRED;
-    if (timer->endTime < TMR2 && timer->overflowsRequired == 0) // timer expired
+    if (timer->endTime < TMR4 && timer->overflowsRequired == 0) // timer expired
         return TIMER_EXPIRED;
-    else if (timer->endTime < TMR2 && timer->overflowsRequired > 0) // timer expired, needs overflow
+    else if (timer->endTime < TMR4 && timer->overflowsRequired > 0) // timer expired, needs overflow
     {
         if (overflow0 - timer->overflow0 == timer->overflowsRequired) // overflown
             return TIMER_EXPIRED;
@@ -57,8 +57,8 @@ TimerStatus Timer_GetStatus(Timer *  timer)
     return TIMER_RUNNING;
 }
 
-void __ISR(_TIMER_2_VECTOR,ipl5auto) Timer1Handler(void)
+void __ISR(_TIMER_4_VECTOR,ipl5auto) Timer1Handler(void)
 {
     overflow0++;
-    IFS0bits.T2IF = 0; // reset interrupt flag
+    IFS0bits.T4IF = 0; // reset interrupt flag
 }

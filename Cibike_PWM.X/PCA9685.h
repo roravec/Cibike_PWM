@@ -116,7 +116,7 @@
 /***************************************/
 
 #define PCA9685_NUMBER_OF_CHANNELS  16
-#define PCA9685_CLOCK               25000000UL
+#define PCA9685_CLOCK               27000000UL
 #define PCA9685_MAXIMUM_TIME        4095
 #define PCA9685_PRESCALE_MIN        3
 #define PCA9685_PRESCALE_MAX        0xFF

@@ -58,7 +58,7 @@ void PCA9685_SetMode2(uint8_t outne, bool outdrv, bool och, bool invrt)
 }
 void PCA9685_SendCommand(uint8_t registerAddress, uint8_t value)
 {
-    I2C_Start(PCA9685_ADDRESS_W);
+    I2C_Start(PCA9685_ADDRESS_W,0);
     I2C_Write(registerAddress, 1);
     I2C_Write(value, 1);
     I2C_Stop();
@@ -69,7 +69,7 @@ void PCA9685_SendCommand(uint8_t registerAddress, uint8_t value)
 // TOTAL is 4095
 void PCA9685_SetChannel(PCA9685_Channel channel, uint16_t valueON, uint16_t valueOFF)
 {
-    I2C_Start(PCA9685_ADDRESS_W);
+    I2C_Start(PCA9685_ADDRESS_W,0);
     I2C_Write(channel, 1);
     I2C_Write((valueON&0xFF), 1);
     I2C_Write((valueON&0xF00)>>8, 1);
@@ -109,7 +109,7 @@ void PCA9685_SetChannelDuty(PCA9685_Channel channel, uint8_t duty)
 }
 void PCA9685_SetAllChannels(uint16_t valueON, uint16_t valueOFF)
 {
-    I2C_Start(PCA9685_ADDRESS_W);
+    I2C_Start(PCA9685_ADDRESS_W,0);
     I2C_Write(PCA9685_REG_ALL_LED_ON_L,1);
     I2C_Write((valueON&0xFF), 1);
     I2C_Write((valueON&0xF00)>>8, 1);

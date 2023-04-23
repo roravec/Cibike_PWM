@@ -25,10 +25,14 @@ extern "C" {
     void UI_Init(void);
     void UI_Clear();
     void UI_WriteLine(UI_Line line, uint8_t * str);
-    void UI_PrintStatus(uint8_t activeLine, uint16_t freq, uint8_t channel, uint8_t value);
-    void UI_PrintChannelDuty(uint8_t channel, uint8_t value);
+    void UI_PrintStatus(uint8_t activeLine, uint16_t freq, uint8_t channel, uint8_t value, bool locked);
+    void UI_UpdateStatus(uint8_t activeLine, uint16_t freq, uint8_t channel, uint8_t value, bool locked);
+    void UI_PrintChannelDuty(uint8_t value);
     void UI_PrintFreq(uint16_t freq);
     void UI_ClearLine(uint8_t line);
+    void UI_PrintMemData(uint8_t * data, uint8_t len);
+    void UI_PrintUpdateStart();
+    void UI_PrintUpdateEnd();
 
 
 #ifdef	__cplusplus

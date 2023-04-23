@@ -26,7 +26,8 @@ void M24256E_ReadPage(uint16_t address, uint8_t * data, uint8_t len);
 void M24256E_WriteByte(uint16_t address, uint8_t data);
 void M24256E_WritePage(uint16_t address, uint8_t * data, uint8_t len);
 
-
+void M24256E_WLock(void);
+void M24256E_WUnlock(void);
 
 #ifdef	__cplusplus
 }

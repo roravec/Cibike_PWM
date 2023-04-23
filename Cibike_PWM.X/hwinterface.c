@@ -21,6 +21,8 @@ void HW_Init(void)
     HW_FREQ_DUTY_TRIS = 1;
     
     HW_MEMORY_ENABLE_TRIS = 0;
+    HW_MEMORY_ENABLE_LAT = 0;
+    
     HW_PWMCON_ENABLE_TRIS = 0;
     HW_PWMCON_ENABLE_LAT = 1; // disable
     

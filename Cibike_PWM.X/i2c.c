@@ -53,13 +53,13 @@ void I2C_WaitForIdle(void)
 }
 
 // I2C_start() sends a start condition  
-void I2C_Start(uint8_t addr)
+void I2C_Start(uint8_t addr, uint8_t wait_ack)
 {
     I2C_WaitForIdle();
     I2C1CONbits.SEN = 1;
     while (I2C1CONbits.SEN == 1);
     if (addr != 0)
-        I2C_Write(addr, 0);
+        I2C_Write(addr, wait_ack);
 }
 
 // I2C_stop() sends a stop condition  
@@ -70,13 +70,13 @@ void I2C_Stop()
 }
 
 // I2C_restart() sends a repeated start/restart condition
-void I2C_Restart(uint8_t addr)
+void I2C_Restart(uint8_t addr, uint8_t wait_ack)
 {
     I2C_WaitForIdle();
     I2C2CONbits.RSEN = 1;
     while (I2C1CONbits.RSEN == 1);
     if (addr != 0)
-        I2C_Write(addr, 0);
+        I2C_Write(addr, wait_ack);
 }
 
 // I2C_ack() sends an ACK condition

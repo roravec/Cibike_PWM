@@ -37,7 +37,7 @@ void LCD_Init()
 
 void LCD_IO_Expander_Write(uint8_t Data) 
 {
-    I2C_Start(i2c_add);
+    I2C_Start(i2c_add,0);
     I2C_Write(Data | BackLight_State, 0);
     I2C_Stop();
 }

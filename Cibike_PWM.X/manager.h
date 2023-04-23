@@ -52,7 +52,7 @@ extern "C" {
     void Manager_CheckMode(void);
     void Manager_DutyMode(void);
     void Manager_FreqMode(void);
-    void Manager_UpdateDisplay(void);
+    void Manager_UpdateDisplay(bool fullUpdate);
     void Manager_ApplyPWMValues(void);
     uint8_t Manager_GetNiceChNum(uint8_t chNum);
     void Manager_InitValues(void);

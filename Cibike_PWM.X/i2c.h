@@ -13,9 +13,9 @@
 
 void I2C_Init(uint32_t sys_frequency, uint32_t frequency);
 void I2C_WaitForIdle(void);
-void I2C_Start(uint8_t addr);
+void I2C_Start(uint8_t addr, uint8_t wait_ack);
 void I2C_Stop();
-void I2C_Restart(uint8_t addr);
+void I2C_Restart(uint8_t addr, uint8_t wait_ack);
 void I2C_PinRestart();
 void I2C_Ack(void);
 void I2C_Nack(void); // Acknowledge Data bit

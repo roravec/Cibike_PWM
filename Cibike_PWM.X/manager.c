@@ -7,7 +7,7 @@ bool displayUpdated = 0;
 bool resetApplied = 0;
 
 static uint8_t memoryData[MANAGER_USED_MEMORY_BYTES];
-uint16_t displayTimeout = 500;
+uint16_t displayTimeout = 1000;
 
 void Manager_Init(void)
 {
@@ -33,6 +33,7 @@ void Manager_Init(void)
     UI_WriteLine(LINE_1, "Cibike PWM");
     UI_WriteLine(LINE_2, "Initialized.");
     Delay_ms(500);
+    Manager_UpdateDisplay(1);
 }
 
 static uint32_t loopCounter = 0;
@@ -43,7 +44,7 @@ void Manager_Loop(void)
 
     if (Timer_GetStatus(&displayRefreshTimer) != TIMER_RUNNING && !displayUpdated)
     {
-        Manager_UpdateDisplay();
+        Manager_UpdateDisplay(0);
         displayUpdated = 1;
         Manager_ApplyPWMValues();
     }
@@ -58,7 +59,7 @@ void Manager_CheckMode(void)
     {
         Per_SetActualChannel(rotPos);
         Manager_SetCurrentChannel(rotPos);
-        Manager_UpdateDisplay();
+        Manager_UpdateDisplay(0);
     }
     if (previousMode != Peripherals_GetFreqDuty()) 
     {
@@ -67,7 +68,7 @@ void Manager_CheckMode(void)
             currentMode = DUTY_MODE;
         else
             currentMode = FREQ_MODE;
-        Manager_UpdateDisplay();
+        Manager_UpdateDisplay(0);
     }
 
     switch (currentMode)
@@ -99,6 +100,7 @@ void Manager_DutyMode(void)
         {
             Manager_SetChDuty(Manager_GetCurrentChannel(), ++currentChannelDuty);
             Manager_ScheduleDataUpdate();
+            UI_PrintChannelDuty(Manager_GetChDuty(Manager_GetCurrentChannel()));
         }
     }
     if (rotMove == CCW_MOVEMENT)
@@ -108,6 +110,7 @@ void Manager_DutyMode(void)
         {
             Manager_SetChDuty(Manager_GetCurrentChannel(), --currentChannelDuty);
             Manager_ScheduleDataUpdate();
+            UI_PrintChannelDuty(Manager_GetChDuty(Manager_GetCurrentChannel()));
         }
     }
 }
@@ -123,6 +126,7 @@ void Manager_FreqMode(void)
         {
             Manager_SetFreq(++actualFreq);
             Manager_ScheduleDataUpdate();
+            UI_PrintFreq(Manager_GetFreq());
         }
     }
     if (rotMove == CCW_MOVEMENT)
@@ -132,11 +136,12 @@ void Manager_FreqMode(void)
         {
             Manager_SetFreq(--actualFreq);
             Manager_ScheduleDataUpdate();
+            UI_PrintFreq(Manager_GetFreq());
         }
     }
 }
 
-void Manager_UpdateDisplay()
+void Manager_UpdateDisplay(bool fullUpdate)
 {
     uint8_t actualFreq = Manager_GetFreq();
     uint8_t currentChannelDuty = Manager_GetChDuty(Manager_GetCurrentChannel());
@@ -144,12 +149,16 @@ void Manager_UpdateDisplay()
     {
         case UNKNOWN_MODE: break;
         case DUTY_MODE: 
-            UI_PrintStatus(1, actualFreq, Manager_GetNiceChNum(Manager_GetCurrentChannel()), currentChannelDuty);
-            //UI_PrintChannelDuty(Manager_GetNiceChNum(actualChannel), actualChannelDuties[actualChannel]);
+            if (fullUpdate)
+                UI_PrintStatus(1, actualFreq, Manager_GetNiceChNum(Manager_GetCurrentChannel()), currentChannelDuty, Peripherals_GetLock());
+            else
+                UI_UpdateStatus(1, actualFreq, Manager_GetNiceChNum(Manager_GetCurrentChannel()), currentChannelDuty, Peripherals_GetLock());
             break;
         case FREQ_MODE: 
-            UI_PrintStatus(0, actualFreq, Manager_GetNiceChNum(Manager_GetCurrentChannel()), currentChannelDuty);
-            //UI_PrintFreq(100);
+            if (fullUpdate)
+                UI_PrintStatus(0, actualFreq, Manager_GetNiceChNum(Manager_GetCurrentChannel()), currentChannelDuty, Peripherals_GetLock());
+            else
+                UI_UpdateStatus(0, actualFreq, Manager_GetNiceChNum(Manager_GetCurrentChannel()), currentChannelDuty, Peripherals_GetLock());
             break;
     }
 }
@@ -157,6 +166,7 @@ void Manager_UpdateDisplay()
 uint16_t lastUpdatedFreq = 0;
 void Manager_ApplyPWMValues()
 {
+    UI_PrintUpdateStart();
     uint8_t actualFreq = Manager_GetFreq();
     uint8_t currentChannelDuty = Manager_GetChDuty(Manager_GetCurrentChannel());
     if (lastUpdatedFreq != actualFreq) // set only if new frequency is different than actual
@@ -167,6 +177,7 @@ void Manager_ApplyPWMValues()
     PCA9685_SetChannelDuty(PCA9685_GetChannelByNum(Manager_GetNiceChNum(Manager_GetCurrentChannel())), 
             currentChannelDuty);
     Manager_MemorySetAll();
+    UI_PrintUpdateEnd();
 }
 // channels order: 9 8 10 11 3 2 0 1 5 4 6 7 15 14 12 13
 uint8_t Manager_GetNiceChNum(uint8_t chNum)
@@ -196,12 +207,17 @@ uint8_t Manager_GetNiceChNum(uint8_t chNum)
 void Manager_InitValues(void)
 {
     Manager_MemoryReadAll();
+//    UI_PrintMemData(memoryData, MANAGER_USED_MEMORY_BYTES);
+//    Delay_ms(5000);
     if (memoryData[MEM_NO_WRITE_YET] != 1) // no data in memory, set default values
     {
         Manager_SetDefaultValues();
         memoryData[MEM_NO_WRITE_YET] = 1;   // initial data applied
     }
     Manager_ApplyPWMValues();
+    //Manager_MemoryReadAll();
+    //UI_PrintMemData(memoryData, MANAGER_USED_MEMORY_BYTES);
+    //Delay_ms(5000);
 }
 
 void Manager_MemoryReadAll(void)
@@ -279,6 +295,7 @@ void Manager_SetDefaultValues(void)
     UI_WriteLine(LINE_1, "Default values");
     UI_WriteLine(LINE_2, "applied.");
     Delay_ms(1000);
+    Manager_UpdateDisplay(1);
 }
 
 void Manager_ScheduleDataUpdate(void)

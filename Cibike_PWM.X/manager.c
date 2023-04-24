@@ -46,7 +46,7 @@ void Manager_Loop(void)
     {
         Manager_UpdateDisplay(0);
         displayUpdated = 1;
-        Manager_ApplyPWMValues();
+        Manager_ApplyPWMValues(0);
     }
 }
 
@@ -164,7 +164,7 @@ void Manager_UpdateDisplay(bool fullUpdate)
 }
 
 uint16_t lastUpdatedFreq = 0;
-void Manager_ApplyPWMValues()
+void Manager_ApplyPWMValues(bool allChannel)
 {
     UI_PrintUpdateStart();
     uint8_t actualFreq = Manager_GetFreq();
@@ -174,8 +174,21 @@ void Manager_ApplyPWMValues()
         lastUpdatedFreq = actualFreq;
         PCA9685_SetFreq(actualFreq);
     }
-    PCA9685_SetChannelDuty(PCA9685_GetChannelByNum(Manager_GetNiceChNum(Manager_GetCurrentChannel())), 
+    if (allChannel) // set all channels
+    {
+        for (uint8_t i = 0; i < ROTARY_CHANNELS ;i++)
+        {
+            currentChannelDuty = Manager_GetChDuty(i);
+            PCA9685_SetChannelDuty(
+                    PCA9685_GetChannelByNum(i), 
+                    currentChannelDuty);
+        }
+    }
+    else
+    {
+        PCA9685_SetChannelDuty(PCA9685_GetChannelByNum(Manager_GetNiceChNum(Manager_GetCurrentChannel())), 
             currentChannelDuty);
+    }
     Manager_MemorySetAll();
     UI_PrintUpdateEnd();
 }
@@ -214,7 +227,7 @@ void Manager_InitValues(void)
         Manager_SetDefaultValues();
         memoryData[MEM_NO_WRITE_YET] = 1;   // initial data applied
     }
-    Manager_ApplyPWMValues();
+    Manager_ApplyPWMValues(1);
     //Manager_MemoryReadAll();
     //UI_PrintMemData(memoryData, MANAGER_USED_MEMORY_BYTES);
     //Delay_ms(5000);
@@ -291,7 +304,7 @@ void Manager_SetDefaultValues(void)
     Manager_SetFreq(MANAGER_DEFAULT_FREQ);
     for (uint8_t i=0;i<ROTARY_CHANNELS;i++)
         Manager_SetChDuty(i, MANAGER_DEFAULT_DUTY);
-    Manager_ApplyPWMValues();
+    Manager_ApplyPWMValues(1);
     UI_WriteLine(LINE_1, "Default values");
     UI_WriteLine(LINE_2, "applied.");
     Delay_ms(1000);

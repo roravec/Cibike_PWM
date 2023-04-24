@@ -53,7 +53,7 @@ extern "C" {
     void Manager_DutyMode(void);
     void Manager_FreqMode(void);
     void Manager_UpdateDisplay(bool fullUpdate);
-    void Manager_ApplyPWMValues(void);
+    void Manager_ApplyPWMValues(bool allChannel);
     uint8_t Manager_GetNiceChNum(uint8_t chNum);
     void Manager_InitValues(void);
     
